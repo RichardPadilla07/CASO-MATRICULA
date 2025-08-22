@@ -1,12 +1,15 @@
 // Script para la gestión y creación de clientes en el panel de administración.
 // Aquí se definen funciones para el CRUD de clientes.
 // Puedes modificar la lógica, nombres de funciones o variables según la temática o cambios futuros en el proyecto.
+// Script para la gestión y creación de estudiantes en el panel de administración.
+// Aquí se definen funciones para el CRUD de estudiantes.
+// Puedes modificar la lógica, nombres de funciones o variables según la temática o cambios futuros en el proyecto.
 
 // API para clientes
 const API_ESTUDIANTES = 'http://localhost:3000/api/estudiantes';
 
-// Cargar clientes
-async function cargarClientes() {
+// Cargar estudiantes
+async function cargarEstudiantes() {
   const tbody = document.getElementById('tabla-clientes-body');
   if (!tbody) return;
   tbody.innerHTML = '';
@@ -37,7 +40,7 @@ async function cargarClientes() {
   }
 }
 
-// Manejar creación de cliente
+// Manejar creación de estudiante
 async function handleCrearEstudiante(e) {
   e.preventDefault();
   const form = e.target;
@@ -71,7 +74,7 @@ async function handleCrearEstudiante(e) {
   }
 }
 
-// Eliminar cliente
+// Eliminar estudiante
 window.eliminarEstudiante = async function(cedula) {
   if (!confirm('¿Seguro que deseas eliminar este estudiante?')) return;
   try {
@@ -83,7 +86,7 @@ window.eliminarEstudiante = async function(cedula) {
   }
 }
 
-// Editar cliente
+// Editar estudiante
 window.editarEstudiante = async function(cedula) {
   try {
     const res = await fetch(`${API_ESTUDIANTES}/${cedula}`);
@@ -142,6 +145,6 @@ window.editarEstudiante = async function(cedula) {
 // Inicialización
 document.addEventListener('DOMContentLoaded', () => {
   cargarEstudiantes();
-  const formCliente = document.getElementById('form-cliente');
-  if (formCliente) formCliente.onsubmit = handleCrearEstudiante;
+  const formEstudiante = document.getElementById('form-cliente');
+  if (formEstudiante) formEstudiante.onsubmit = handleCrearEstudiante;
 });
