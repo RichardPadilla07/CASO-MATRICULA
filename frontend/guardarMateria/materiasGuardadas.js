@@ -14,22 +14,22 @@ async function mostrarMateriasGuardadas() {
     materias.forEach((mat, idx) => {
       const tr = document.createElement('tr');
       tr.innerHTML = `
-        <td>${idx + 1}</td>
-        <td>${mat.nombre || ''}</td>
-        <td>${mat.creditos || ''}</td>
-        <td>${mat.codigo_materia || ''}</td>
-        <td>${mat.codigo_matricula || ''}</td>
-        <td><button class="btn-eliminar" onclick="eliminarMateriaGuardada('${mat.id_materia}')">Eliminar</button></td>
-      `;
+          <td>${idx + 1}</td>
+          <td>${mat.nombre || ''}</td>
+          <td>${mat.creditos || ''}</td>
+          <td>${mat.codigo_materia || ''}</td>
+          <td>${mat.codigo_matricula || ''}</td>
+          <td><button class="btn-eliminar" onclick="eliminarMateriaGuardada('${mat.id_materia}')">🗑 Eliminar</button></td>
+        `;
       contenedor.appendChild(tr);
     });
   } catch (err) {
     contenedor.innerHTML = '<tr><td colspan="5">Error al cargar materias guardadas.</td></tr>';
   }
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-// Eliminar materia guardada
+if (document.getElementById('materias-guardadas-body')) {
+  mostrarMateriasGuardadas();
+}
 async function eliminarMateriaGuardada(id_materia) {
   const cedula = localStorage.getItem('cedulaCliente');
   if (!id_materia || !cedula) return;
@@ -49,7 +49,6 @@ async function eliminarMateriaGuardada(id_materia) {
     alert('Error al eliminar la materia.');
   }
 }
-  if (document.getElementById('materias-guardadas-body')) {
-    mostrarMateriasGuardadas();
-  }
-});
+if (document.getElementById('materias-guardadas-body')) {
+  mostrarMateriasGuardadas();
+}
