@@ -46,13 +46,39 @@ function mostrarMatriculas(matriculas) {
 
 // Acciones de los botones (solo ejemplo, implementar lógica según tu backend)
 window.matricularMatricula = async function(id) {
-  alert('Matricular matrícula: ' + id);
-  // Aquí puedes implementar la lógica para aceptar/matricular
+  try {
+    const res = await fetch(`${API_MATRICULAS}/${id}/estado`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ estado: 'matriculado' })
+    });
+    if (res.ok) {
+      alert('Matrícula actualizada a MATRICULADO');
+      obtenerMatriculas();
+    } else {
+      alert('Error al actualizar matrícula');
+    }
+  } catch (error) {
+    alert('Error al actualizar matrícula: ' + error.message);
+  }
 }
 
 window.anularMatricula = async function(id) {
-  alert('Anular matrícula: ' + id);
-  // Aquí puedes implementar la lógica para anular/eliminar
+  try {
+    const res = await fetch(`${API_MATRICULAS}/${id}/estado`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ estado: 'anulado' })
+    });
+    if (res.ok) {
+      alert('Matrícula actualizada a ANULADO');
+      obtenerMatriculas();
+    } else {
+      alert('Error al actualizar matrícula');
+    }
+  } catch (error) {
+    alert('Error al actualizar matrícula: ' + error.message);
+  }
 }
 
 // Cambiar estado de un pedido (NO FUNCIONO AUN LO DE ADMIN DE MODULO PEDIDOS)

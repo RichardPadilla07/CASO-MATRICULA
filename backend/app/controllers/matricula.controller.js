@@ -73,3 +73,20 @@ export const deleteMatricula = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+export const actualizarEstado = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { estado } = req.body;
+    if (!['pendiente', 'matriculado', 'anulado'].includes(estado)) {
+      return res.status(400).json({ error: 'Estado inválido' });
+    }
+    const matricula = await Matricula.findByIdAndUpdate(id, { estado }, { new: true })
+      .populate('id_estudiante')
+      .populate('id_materia');
+    if (!matricula) return res.status(404).json({ error: 'Matricula not found' });
+    res.json(matricula);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
