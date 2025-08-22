@@ -49,6 +49,4 @@ async function eliminarMateriaGuardada(id_materia) {
     alert('Error al eliminar la materia.');
   }
 }
-if (document.getElementById('materias-guardadas-body')) {
-  mostrarMateriasGuardadas();
-}
+

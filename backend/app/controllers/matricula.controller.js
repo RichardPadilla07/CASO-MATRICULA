@@ -1,6 +1,7 @@
 // Obtener todas las matrículas de un estudiante por cédula
 import Estudiante from '../models/estudiante.js';
 import Matricula from "../models/matricula.js";
+import Materia from "../models/materia.js";
 
 
 export const getMatriculasByCedula = async (req, res) => {
@@ -18,6 +19,12 @@ export const getMatriculasByCedula = async (req, res) => {
 
 export const createMatricula = async (req, res) => {
   try {
+    const { id_materia } = req.body;
+    // Verificar que la materia exista
+    const materia = await Materia.findById(id_materia);
+    if (!materia) {
+      return res.status(404).json({ error: "No se encontró la materia" });
+    }
     const matricula = new Matricula(req.body);
     await matricula.save();
     res.status(201).json(matricula);
