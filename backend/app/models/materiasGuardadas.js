@@ -6,8 +6,10 @@ import mongoose from "mongoose";
 
 const materiasGuardadasSchema = new mongoose.Schema({
   cedula_estudiante: { type: Number, required: true },
-  materias: [{ type: mongoose.Schema.Types.ObjectId, ref: "Materia" }],
-  codigo_matricula: { type: String },
+  materias: [{
+    id_materia: { type: mongoose.Schema.Types.ObjectId, ref: "Materia" },
+    codigo_matricula: { type: String, required: true }
+  }],
   fecha_guardado: { type: Date, default: Date.now }
 });
 
