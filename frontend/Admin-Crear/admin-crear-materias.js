@@ -3,7 +3,7 @@
 // Puedes modificar la lógica, nombres de funciones o variables según la temática o cambios futuros en el proyecto.
 
 // API para materias
-const API_URL_MATERIAS = 'http://localhost:3000/api/materias';
+const API_URL_MATERIAS = 'http://localhost:4000/api/materias';
 
 // Cargar productos
 document.addEventListener('DOMContentLoaded', () => {

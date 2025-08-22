@@ -3,7 +3,7 @@
 // Puedes modificar la lógica, nombres de funciones o variables según la temática o cambios futuros en el proyecto.
 
 // API para clientes
-const API_ESTUDIANTES = 'http://localhost:3000/api/estudiantes';
+const API_ESTUDIANTES = 'http://localhost:4000/api/estudiantes';
 
 // Cargar clientes
 async function cargarClientes() {

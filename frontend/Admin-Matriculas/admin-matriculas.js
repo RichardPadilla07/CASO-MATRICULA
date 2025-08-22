@@ -5,7 +5,7 @@
 
 
 // API para matrículas
-const API_MATRICULAS = 'http://localhost:3000/api/matriculas';
+const API_MATRICULAS = 'http://localhost:4000/api/matriculas';
 
 
 async function obtenerMatriculas() {

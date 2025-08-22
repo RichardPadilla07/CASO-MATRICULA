@@ -10,7 +10,7 @@ let datosAdmin = {};
 async function obtenerDatosAdmin() {
   try {
     if (!adminId) return;
-    const res = await fetch(`http://localhost:3000/api/usuarios/${adminId}`);
+    const res = await fetch(`http://localhost:4000/api/usuarios/${adminId}`);
     if (res.ok) {
       datosAdmin = await res.json();
       renderPerfil();
@@ -71,7 +71,7 @@ if (btnActualizarPerfil && modalActualizar && formActualizar && btnCerrarModal) 
     };
     try {
       // Actualizar datos del administrador
-      const res = await fetch(`http://localhost:3000/api/usuarios/${adminId}`, {
+      const res = await fetch(`http://localhost:4000/api/usuarios/${adminId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(datos)

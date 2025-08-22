@@ -43,7 +43,7 @@ app.use("/api/matriculas", matriculaRoutes);
 app.use("/api/materiasGuardadas", materiasGuardadasRoutes);
 
 // Configuración del servidor
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(` El servidor esta corriendo en el puerto ${PORT}.`);
 });

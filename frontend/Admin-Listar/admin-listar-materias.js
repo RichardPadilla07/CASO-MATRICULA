@@ -2,7 +2,7 @@
 // Aquí se definen funciones para el CRUD y visualización de productos.
 // Puedes modificar la lógica, nombres de funciones o variables según la temática o cambios futuros en el proyecto.
 // CRUD de productos para el panel admin
-const API_URL = 'http://localhost:3000/api/materias';
+const API_URL = 'http://localhost:4000/api/materias';
 
 async function cargarMaterias() {
   const tbody = document.getElementById('tabla-materias-body');
