@@ -11,10 +11,10 @@ async function mostrarMateriasGuardadas() {
       contenedor.innerHTML = '<tr><td colspan="6">No tienes materias guardadas.</td></tr>';
       return;
     }
-    materias.forEach((mat) => {
+    materias.forEach((mat, idx) => {
       const tr = document.createElement('tr');
       tr.innerHTML = `
-        <td>${mat.id_materia || ''}</td>
+        <td>${idx + 1}</td>
         <td>${mat.nombre || ''}</td>
         <td>${mat.creditos || ''}</td>
         <td>${mat.codigo_materia || ''}</td>
