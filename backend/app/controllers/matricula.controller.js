@@ -9,7 +9,9 @@ export const getMatriculasByCedula = async (req, res) => {
     const cedula = req.params.cedula;
     const estudiante = await Estudiante.findOne({ cedula });
     if (!estudiante) return res.status(404).json({ error: 'Estudiante no encontrado' });
-    const matriculas = await Matricula.find({ id_estudiante: estudiante._id }).populate('id_materia');
+    const matriculas = await Matricula.find({ id_estudiante: estudiante._id })
+      .populate('id_materia')
+      .populate('id_estudiante');
     res.json(matriculas);
   } catch (err) {
     res.status(500).json({ error: err.message });

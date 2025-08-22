@@ -113,7 +113,7 @@ async function mostrarPedidosCliente() {
   const cedula = document.getElementById('cedula_cliente').value;
   try {
     // Cambiar la ruta para obtener matrículas por cédula
-    const res = await fetch(`http://localhost:3000/api/matricula/estudiante/${cedula}`);
+  const res = await fetch(`http://localhost:3000/api/matriculas/estudiante/${cedula}`);
     if (!res.ok) throw new Error('Error al obtener matrículas');
     const matriculas = await res.json();
     renderPedidosTabla(matriculas);
@@ -123,22 +123,19 @@ async function mostrarPedidosCliente() {
 }
 
 // Renderizar tabla de pedidos
-function renderPedidosTabla(pedidos) {
+function renderPedidosTabla(matriculas) {
   const tbody = document.querySelector('#tablaPedidos tbody');
   tbody.innerHTML = '';
-  pedidos.forEach(ped => {
+  matriculas.forEach((m, idx) => {
     const tr = document.createElement('tr');
     tr.innerHTML = `
-      <td>${ped._id}</td>
-      <td>${ped.codigo_pedido || ''}</td>
-      <td>${ped.cedula_cliente}</td>
-      <td>${ped.codigo_producto || ''}</td>
-      <td>${ped.cantidad}</td>
-      <td>${ped.nombre || ''}</td>
-      <td>${ped.categoria || ''}</td>
-      <td>${ped.precio || ''}</td>
-      <td>${ped.stock || ''}</td>
-      <td>${ped.estado || 'pendiente'}</td>
+      <td>${idx + 1}</td>
+      <td>${m.id_materia?.codigo || ''}</td>
+      <td>${m.id_estudiante?.cedula || ''}</td>
+      <td>${m.id_materia?.nombre || ''}</td>
+      <td>${m.id_materia?.creditos || ''}</td>
+      <td>${m.codigo || ''}</td>
+      <td>${m.estado || 'pendiente'}</td>
     `;
     tbody.appendChild(tr);
   });
