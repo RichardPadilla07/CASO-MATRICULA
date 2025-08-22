@@ -71,35 +71,34 @@ function mostrarDatosProducto(producto) {
 async function crearPedido(e) {
   e.preventDefault();
   const cedula = document.getElementById('cedula_cliente').value;
-  const codigo = document.getElementById('codigo_producto').value;
-  const cantidad = document.getElementById('cantidadProducto').value;
+  const codigoMatricula = document.getElementById('codigo_producto').value;
+  // Buscar la materia guardada por código de matrícula
   try {
-    // Obtener producto para el código
-    const resProd = await fetch(`http://localhost:3000/api/productos/codigo/${codigo}`);
-    if (!resProd.ok) throw new Error('Producto no encontrado');
-    const producto = await resProd.json();
-    // Generar un código de pedido único como número
-    const codigo_pedido = Date.now();
-    const pedido = {
-      codigo_pedido,
-      cedula_cliente: cedula,
-      codigo_producto: producto.codigo,
-      cantidad: cantidad
+    const resMaterias = await fetch(`http://localhost:3000/api/materiasGuardadas/${cedula}`);
+    if (!resMaterias.ok) throw new Error('No se pudo consultar materias guardadas');
+    const materias = await resMaterias.json();
+    const materia = materias.find(m => m.codigo_matricula === codigoMatricula);
+    if (!materia) throw new Error('Materia no guardada');
+    // Enviar la matrícula al admin usando el código de matrícula como clave
+    const matricula = {
+      codigo_matricula: materia.codigo_matricula,
+      cedula_estudiante: cedula,
+      codigo_materia: materia.codigo_materia,
+      nombre_materia: materia.nombre,
+      creditos: materia.creditos
     };
-    const res = await fetch('http://localhost:3000/api/pedidos', {
+    const res = await fetch('http://localhost:3000/api/matricula', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(pedido)
+      body: JSON.stringify(matricula)
     });
-    if (!res.ok) throw new Error('Error al crear pedido');
-    window.alert('¡Pedido creado exitosamente!');
-    // Restablecer formulario y ocultar producto buscado
+    if (!res.ok) throw new Error('Error al crear matrícula');
+    window.alert('¡Matrícula enviada exitosamente al admin!');
     document.getElementById('codigo_producto').value = '';
-    document.getElementById('cantidadProducto').value = 1;
     document.getElementById('datosProducto').style.display = 'none';
     mostrarPedidosCliente();
   } catch (err) {
-    alert('Error al crear pedido');
+    alert('Error al crear matrícula: ' + err.message);
   }
 }
 
@@ -108,7 +107,7 @@ async function mostrarPedidosCliente() {
   const cedula = document.getElementById('cedula_cliente').value;
   try {
     // Cambiar la ruta para obtener matrículas por cédula
-    const res = await fetch(`http://localhost:3000/api/matricula/${cedula}`);
+    const res = await fetch(`http://localhost:3000/api/matricula/estudiante/${cedula}`);
     if (!res.ok) throw new Error('Error al obtener matrículas');
     const matriculas = await res.json();
     renderPedidosTabla(matriculas);

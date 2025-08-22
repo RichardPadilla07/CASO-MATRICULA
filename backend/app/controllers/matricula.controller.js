@@ -1,4 +1,20 @@
+// Obtener todas las matrículas de un estudiante por cédula
+import Estudiante from '../models/estudiante.js';
 import Matricula from "../models/matricula.js";
+
+
+export const getMatriculasByCedula = async (req, res) => {
+  try {
+    const cedula = req.params.cedula;
+    const estudiante = await Estudiante.findOne({ cedula });
+    if (!estudiante) return res.status(404).json({ error: 'Estudiante no encontrado' });
+    const matriculas = await Matricula.find({ id_estudiante: estudiante._id }).populate('id_materia');
+    res.json(matriculas);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
 
 export const createMatricula = async (req, res) => {
   try {
