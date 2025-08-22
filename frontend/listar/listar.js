@@ -5,17 +5,17 @@
 // Agregar producto al carrito
 async function agregarAlCarrito(idProducto) {
   const cedula = localStorage.getItem('cedulaCliente') || localStorage.getItem('clienteCedula');
-  if (!cedula) return alert('No se encontró la cédula del cliente');
+  if (!cedula) return alert('No se encontró la cédula del estudiante');
   try {
-    const res = await fetch('http://localhost:3000/api/carrito', {
+    const res = await fetch('http://localhost:3000/api/materiasGuardadas/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ cedula_cliente: cedula, id_producto: idProducto, cantidad: 1 })
+      body: JSON.stringify({ cedula_estudiante: cedula, id_materia: idProducto })
     });
-    if (!res.ok) throw new Error('Error al agregar al carrito');
-    alert('Producto agregado al carrito');
+    if (!res.ok) throw new Error('Error al guardar la materia');
+    alert('Materia guardada exitosamente');
   } catch (err) {
-    alert('Error al agregar al carrito');
+    alert('Error al guardar la materia');
   }
 }
 
@@ -32,7 +32,7 @@ function renderProductosTabla(productos) {
       <td>${prod.codigo}</td>
       <td>${prod.descripcion}</td>
       <td>${prod.creditos}</td>
-  <td><button class="btn-login" onclick="agregarAlCarrito('${prod._id}')">Agregar al carrito</button></td>
+  <td><button class="btn-login" onclick="agregarAlCarrito('${prod._id}')">Guardar materia</button></td>
     `;
     tbody.appendChild(tr);
   });

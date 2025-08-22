@@ -316,7 +316,19 @@
         <div id="carrito" style="min-height:300px;width:100%;max-width:700px;margin:auto;">
           <h2 style="color:#2575fc;margin-bottom:10px;">Materias Guardadas</h2>
           <p style="margin-bottom:20px;color:#444;">En este modulo puedes ver tus materias seleccionadas.</p>
-          <div id="carrito-lista" style="display:flex;flex-wrap:wrap;gap:20px;"></div>
+          <table style="width:100%;margin-bottom:10px;">
+            <thead>
+              <tr style="background:#f3f3f3;">
+                <th>ID Materia</th>
+                <th>Nombre</th>
+                <th>Créditos</th>
+                <th>Código Materia</th>
+                <th>Código Matrícula</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="materias-guardadas-body"></tbody>
+          </table>
           <div id="carrito-vacio" style="color:#888;margin-top:20px;display:none;">No hay materias guardadas aun.</div>
         </div>
       </section>
