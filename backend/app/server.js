@@ -4,7 +4,7 @@ import cors from "cors";
 import path from "path";
 import usuarioRoutes from "./routes/usuario.routes.js";
 import estudianteRoutes from "./routes/estudiante.routes.js";
-import carritoRoutes from "./routes/carrito.routes.js";
+// import carritoRoutes from "./routes/carrito.routes.js";
 import materiaRoutes from "./routes/materia.routes.js";
 import matriculaRoutes from "./routes/matricula.routes.js";
 import materiasGuardadasRoutes from "./routes/materiasGuardadas.routes.js";
@@ -37,7 +37,7 @@ app.get("/", (req, res) => {
 // Rutas de la API
 app.use("/api/usuarios", usuarioRoutes);
 app.use("/api/estudiantes", estudianteRoutes);
-app.use("/api/carrito", carritoRoutes);
+// app.use("/api/carrito", carritoRoutes);
 app.use("/api/materias", materiaRoutes);
 app.use("/api/matriculas", matriculaRoutes);
 app.use("/api/materiasGuardadas", materiasGuardadasRoutes);
