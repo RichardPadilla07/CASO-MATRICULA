@@ -1,3 +1,13 @@
+// Buscar materia por código
+export const getMateriaByCodigo = async (req, res) => {
+  try {
+    const materia = await Materia.findOne({ codigo: req.params.codigo });
+    if (!materia) return res.status(404).json({ error: 'Materia not found' });
+    res.json(materia);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
 import Materia from "../models/materia.js";
 
 export const createMateria = async (req, res) => {

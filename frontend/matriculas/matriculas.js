@@ -72,20 +72,26 @@ async function crearPedido(e) {
   e.preventDefault();
   const cedula = document.getElementById('cedula_cliente').value;
   const codigoMatricula = document.getElementById('codigo_producto').value;
-  // Buscar la materia guardada por código de matrícula
   try {
+    // Buscar estudiante por cédula
+  const resEst = await fetch(`http://localhost:3000/api/estudiantes/${cedula}`);
+    if (!resEst.ok) throw new Error('No se encontró el estudiante');
+    const estudiante = await resEst.json();
+    // Buscar materia guardada por código de matrícula
     const resMaterias = await fetch(`http://localhost:3000/api/materiasGuardadas/${cedula}`);
     if (!resMaterias.ok) throw new Error('No se pudo consultar materias guardadas');
     const materias = await resMaterias.json();
     const materia = materias.find(m => m.codigo_matricula === codigoMatricula);
     if (!materia) throw new Error('Materia no guardada');
-    // Enviar la matrícula al admin usando el código de matrícula como clave
+    // Buscar materia por código para obtener el ObjectId
+    const resMat = await fetch(`http://localhost:3000/api/materia/${materia.codigo_materia}`);
+    if (!resMat.ok) throw new Error('No se encontró la materia');
+    const materiaObj = await resMat.json();
+    // Crear matrícula con los ObjectId y el código de matrícula
     const matricula = {
-      codigo_matricula: materia.codigo_matricula,
-      cedula_estudiante: cedula,
-      codigo_materia: materia.codigo_materia,
-      nombre_materia: materia.nombre,
-      creditos: materia.creditos
+      codigo: materia.codigo_matricula,
+      id_estudiante: estudiante._id,
+      id_materia: materiaObj._id
     };
     const res = await fetch('http://localhost:3000/api/matricula', {
       method: 'POST',
