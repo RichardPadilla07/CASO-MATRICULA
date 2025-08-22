@@ -84,7 +84,7 @@ async function crearPedido(e) {
     const materia = materias.find(m => m.codigo_matricula === codigoMatricula);
     if (!materia) throw new Error('Materia no guardada');
     // Buscar materia por código para obtener el ObjectId
-    const resMat = await fetch(`http://localhost:3000/api/materia/${materia.codigo_materia}`);
+  const resMat = await fetch(`http://localhost:3000/api/materias/codigo/${materia.codigo_materia}`);
     if (!resMat.ok) throw new Error('No se encontró la materia');
     const materiaObj = await resMat.json();
     // Crear matrícula con los ObjectId y el código de matrícula
@@ -93,7 +93,7 @@ async function crearPedido(e) {
       id_estudiante: estudiante._id,
       id_materia: materiaObj._id
     };
-    const res = await fetch('http://localhost:3000/api/matricula', {
+  const res = await fetch('http://localhost:3000/api/matriculas', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(matricula)
