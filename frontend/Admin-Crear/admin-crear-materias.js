@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', obtenerPedidos);
 
 
 // API para materias
-const API_URL = 'http://localhost:3000/api/materias';
+const API_URL_MATERIAS = 'http://localhost:3000/api/materias';
 
 // Cargar productos
 document.addEventListener('DOMContentLoaded', () => {
@@ -92,7 +92,7 @@ async function cargarProductos() {
   const tbody = document.getElementById('tabla-productos-body');
   tbody.innerHTML = '';
   try {
-    const res = await fetch(API_URL);
+  const res = await fetch(API_URL_MATERIAS);
     const productos = await res.json();
     productos.forEach((prod, idx) => {
       const tr = document.createElement('tr');

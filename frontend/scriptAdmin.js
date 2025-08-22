@@ -25,7 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Inicializar eventos
   btnPerfil.onclick = () => mostrarSeccion(seccionPerfil);
-  btnListar.onclick = () => mostrarSeccion(seccionListar);
+  btnListar.onclick = () => {
+    mostrarSeccion(seccionListar);
+    if (window.cargarMaterias) window.cargarMaterias();
+  };
   btnCrear.onclick = () => mostrarSeccion(seccionCrear);
   btnPedidos.onclick = () => {
     mostrarSeccion(seccionPedidos);

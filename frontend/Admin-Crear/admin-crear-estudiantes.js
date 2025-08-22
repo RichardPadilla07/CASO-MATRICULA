@@ -3,7 +3,7 @@
 // Puedes modificar la lógica, nombres de funciones o variables según la temática o cambios futuros en el proyecto.
 
 // API para clientes
-const API_CLIENTES = 'http://localhost:3000/api/clientes';
+const API_ESTUDIANTES = 'http://localhost:3000/api/estudiantes';
 
 // Cargar clientes
 async function cargarClientes() {
@@ -11,37 +11,37 @@ async function cargarClientes() {
   if (!tbody) return;
   tbody.innerHTML = '';
   try {
-    const res = await fetch(API_CLIENTES);
-    const clientes = await res.json();
-    clientes.forEach((cli, idx) => {
+    const res = await fetch(API_ESTUDIANTES);
+    const estudiantes = await res.json();
+    estudiantes.forEach((est, idx) => {
       const tr = document.createElement('tr');
       tr.innerHTML = `
         <td>${idx + 1}</td>
-        <td>${cli.cedula}</td>
-        <td>${cli.nombre}</td>
-        <td>${cli.apellido}</td>
-        <td>${cli.ciudad}</td>
-        <td>${cli.email}</td>
-        <td>${cli.direccion || ''}</td>
-        <td>${cli.telefono || ''}</td>
-        <td>${cli.fecha_nacimiento ? cli.fecha_nacimiento.substring(0,10) : ''}</td>
+        <td>${est.cedula}</td>
+        <td>${est.nombre}</td>
+        <td>${est.apellido}</td>
+        <td>${est.ciudad}</td>
+        <td>${est.email}</td>
+        <td>${est.direccion || ''}</td>
+        <td>${est.telefono || ''}</td>
+        <td>${est.fecha_nacimiento ? est.fecha_nacimiento.substring(0,10) : ''}</td>
         <td style="display:flex;gap:8px;justify-content:center;align-items:center;">
-          <button onclick="editarCliente('${cli.cedula}')">✏️</button>
-          <button onclick="eliminarCliente('${cli.cedula}')">🗑️</button>
+          <button onclick="editarEstudiante('${est.cedula}')">✏️</button>
+          <button onclick="eliminarEstudiante('${est.cedula}')">🗑️</button>
         </td>
       `;
       tbody.appendChild(tr);
     });
   } catch (err) {
-    tbody.innerHTML = '<tr><td colspan="10">Error al cargar clientes</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="10">Error al cargar estudiantes</td></tr>';
   }
 }
 
 // Manejar creación de cliente
-async function handleCrearCliente(e) {
+async function handleCrearEstudiante(e) {
   e.preventDefault();
   const form = e.target;
-  const cliente = {
+  const estudiante = {
     cedula: form.cedula.value.trim(),
     nombre: form.nombre.value.trim(),
     apellido: form.apellido.value.trim(),
@@ -50,21 +50,21 @@ async function handleCrearCliente(e) {
     direccion: form.direccion.value.trim(),
     telefono: form.telefono.value.trim(),
     fecha_nacimiento: form.fecha_nacimiento.value,
-    passwordCliente: form.passwordCliente.value.trim()
+    passwordEstudiante: form.passwordCliente.value.trim()
   };
   try {
-    const res = await fetch(API_CLIENTES, {
+    const res = await fetch(API_ESTUDIANTES, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(cliente)
+      body: JSON.stringify(estudiante)
     });
     if (res.ok) {
       form.reset();
-  alert('Cliente creado correctamente');
-  cargarClientes();
+      alert('Estudiante creado correctamente');
+      cargarEstudiantes();
     } else {
       const data = await res.json();
-      alert(data.error || 'Error al crear cliente');
+      alert(data.error || 'Error al crear estudiante');
     }
   } catch (err) {
     alert('Error de conexión');
@@ -72,34 +72,34 @@ async function handleCrearCliente(e) {
 }
 
 // Eliminar cliente
-window.eliminarCliente = async function(cedula) {
-  if (!confirm('¿Seguro que deseas eliminar este cliente?')) return;
+window.eliminarEstudiante = async function(cedula) {
+  if (!confirm('¿Seguro que deseas eliminar este estudiante?')) return;
   try {
-    const res = await fetch(`${API_CLIENTES}/${cedula}`, { method: 'DELETE' });
-    if (res.ok) cargarClientes();
-    else alert('Error al eliminar cliente');
+    const res = await fetch(`${API_ESTUDIANTES}/${cedula}`, { method: 'DELETE' });
+    if (res.ok) cargarEstudiantes();
+    else alert('Error al eliminar estudiante');
   } catch (err) {
     alert('Error de conexión');
   }
 }
 
 // Editar cliente
-window.editarCliente = async function(cedula) {
+window.editarEstudiante = async function(cedula) {
   try {
-    const res = await fetch(`${API_CLIENTES}/${cedula}`);
-    if (!res.ok) return alert('No se pudo obtener el cliente');
-    const cli = await res.json();
+    const res = await fetch(`${API_ESTUDIANTES}/${cedula}`);
+    if (!res.ok) return alert('No se pudo obtener el estudiante');
+    const est = await res.json();
     const modal = document.getElementById('modal-editar-cliente');
     const form = document.getElementById('form-editar-cliente');
-    form.cedula.value = cli.cedula || '';
-    form.nombre.value = cli.nombre || '';
-    form.apellido.value = cli.apellido || '';
-    form.ciudad.value = cli.ciudad || '';
-    form.email.value = cli.email || '';
-    form.direccion.value = cli.direccion || '';
-    form.telefono.value = cli.telefono || '';
-    form.fecha_nacimiento.value = cli.fecha_nacimiento ? cli.fecha_nacimiento.substring(0,10) : '';
-    form.passwordCliente.value = cli.passwordCliente || '';
+    form.cedula.value = est.cedula || '';
+    form.nombre.value = est.nombre || '';
+    form.apellido.value = est.apellido || '';
+    form.ciudad.value = est.ciudad || '';
+    form.email.value = est.email || '';
+    form.direccion.value = est.direccion || '';
+    form.telefono.value = est.telefono || '';
+    form.fecha_nacimiento.value = est.fecha_nacimiento ? est.fecha_nacimiento.substring(0,10) : '';
+    form.passwordCliente.value = est.passwordEstudiante || '';
     modal.style.display = 'flex';
     form.onsubmit = async function(e) {
       e.preventDefault();
@@ -112,20 +112,20 @@ window.editarCliente = async function(cedula) {
         direccion: form.direccion.value.trim(),
         telefono: form.telefono.value.trim(),
         fecha_nacimiento: form.fecha_nacimiento.value,
-        passwordCliente: form.passwordCliente.value.trim()
+        passwordEstudiante: form.passwordCliente.value.trim()
       };
       try {
-        const res = await fetch(`${API_CLIENTES}/${cedula}`, {
+        const res = await fetch(`${API_ESTUDIANTES}/${cedula}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(datos)
         });
         if (res.ok) {
           modal.style.display = 'none';
-          cargarClientes();
-          alert('Cliente actualizado correctamente');
+          cargarEstudiantes();
+          alert('Estudiante actualizado correctamente');
         } else {
-          alert('Error al actualizar cliente');
+          alert('Error al actualizar estudiante');
         }
       } catch (err) {
         alert('Error de conexión');
@@ -141,7 +141,7 @@ window.editarCliente = async function(cedula) {
 
 // Inicialización
 document.addEventListener('DOMContentLoaded', () => {
-  cargarClientes();
+  cargarEstudiantes();
   const formCliente = document.getElementById('form-cliente');
-  if (formCliente) formCliente.onsubmit = handleCrearCliente;
+  if (formCliente) formCliente.onsubmit = handleCrearEstudiante;
 });
