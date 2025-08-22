@@ -74,7 +74,7 @@ async function crearPedido(e) {
   const codigoMatricula = document.getElementById('codigo_producto').value;
   try {
     // Buscar estudiante por cédula
-  const resEst = await fetch(`http://localhost:3000/api/estudiantes/${cedula}`);
+    const resEst = await fetch(`http://localhost:3000/api/estudiantes/${cedula}`);
     if (!resEst.ok) throw new Error('No se encontró el estudiante');
     const estudiante = await resEst.json();
     // Buscar materia guardada por código de matrícula
@@ -84,7 +84,7 @@ async function crearPedido(e) {
     const materia = materias.find(m => m.codigo_matricula === codigoMatricula);
     if (!materia) throw new Error('Materia no guardada');
     // Buscar materia por código para obtener el ObjectId
-  const resMat = await fetch(`http://localhost:3000/api/materias/codigo/${materia.codigo_materia}`);
+    const resMat = await fetch(`http://localhost:3000/api/materias/codigo/${materia.codigo_materia}`);
     if (!resMat.ok) throw new Error('No se encontró la materia');
     const materiaObj = await resMat.json();
     // Crear matrícula con los ObjectId y el código de matrícula
@@ -93,7 +93,7 @@ async function crearPedido(e) {
       id_estudiante: estudiante._id,
       id_materia: materiaObj._id
     };
-  const res = await fetch('http://localhost:3000/api/matriculas', {
+    const res = await fetch('http://localhost:3000/api/matriculas', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(matricula)
@@ -113,7 +113,7 @@ async function mostrarPedidosCliente() {
   const cedula = document.getElementById('cedula_cliente').value;
   try {
     // Cambiar la ruta para obtener matrículas por cédula
-  const res = await fetch(`http://localhost:3000/api/matriculas/estudiante/${cedula}`);
+    const res = await fetch(`http://localhost:3000/api/matriculas/estudiante/${cedula}`);
     if (!res.ok) throw new Error('Error al obtener matrículas');
     const matriculas = await res.json();
     renderPedidosTabla(matriculas);
@@ -130,9 +130,9 @@ function renderPedidosTabla(matriculas) {
     const tr = document.createElement('tr');
     tr.innerHTML = `
       <td>${idx + 1}</td>
-      <td>${m.id_materia?.codigo || ''}</td>
-      <td>${m.id_estudiante?.cedula || ''}</td>
-      <td>${m.id_materia?.nombre || ''}</td>
+  <td>${m.id_materia?.codigo || ''}</td>
+  <td>${m.id_estudiante && m.id_estudiante.cedula ? m.id_estudiante.cedula : ''}</td>
+  <td>${m.id_materia?.nombre || ''}</td>
       <td>${m.id_materia?.creditos || ''}</td>
       <td>${m.codigo || ''}</td>
       <td>${m.estado || 'pendiente'}</td>
