@@ -20,20 +20,40 @@ function pintarCedulaCliente() {
 }
 
 
-// Buscar producto por código
+// Buscar materia guardada por código de matrícula
 async function buscarProducto() {
-  const codigo = document.getElementById('codigo_producto').value.trim();
-  if (!codigo) return;
+  const codigoMatricula = document.getElementById('codigo_producto').value.trim();
+  const cedula = document.getElementById('cedula_cliente').value.trim();
+  if (!codigoMatricula || !cedula) return;
   try {
-    const res = await fetch(`http://localhost:3000/api/productos/codigo/${codigo}`);
-    if (!res.ok) throw new Error('Producto no encontrado');
-    const producto = await res.json();
-    mostrarDatosProducto(producto);
+    // Obtener todas las materias guardadas del estudiante
+    const res = await fetch(`http://localhost:3000/api/materiasGuardadas/${cedula}`);
+    if (!res.ok) throw new Error('No se pudo consultar materias guardadas');
+    const materias = await res.json();
+    // Buscar la materia por código de matrícula
+    const materia = materias.find(m => m.codigo_matricula === codigoMatricula);
+    if (materia) {
+      mostrarDatosMateriaGuardada(materia);
+    } else {
+      document.getElementById('productoMsg').textContent = 'Materia no guardada';
+      document.getElementById('productoMsg').style.display = 'block';
+      document.getElementById('datosProducto').style.display = 'none';
+    }
   } catch (err) {
-    document.getElementById('productoMsg').textContent = 'Producto no encontrado';
+    document.getElementById('productoMsg').textContent = 'Error al buscar materia';
     document.getElementById('productoMsg').style.display = 'block';
     document.getElementById('datosProducto').style.display = 'none';
   }
+}
+
+// Mostrar datos de la materia guardada encontrada
+function mostrarDatosMateriaGuardada(materia) {
+  document.getElementById('nombreProducto').textContent = materia.nombre;
+  document.getElementById('codigoMateria').textContent = materia.codigo_materia;
+  document.getElementById('creditosMateria').textContent = materia.creditos;
+  document.getElementById('codigoMatricula').textContent = materia.codigo_matricula;
+  document.getElementById('datosProducto').style.display = 'block';
+  document.getElementById('productoMsg').style.display = 'none';
 }
 
 
@@ -87,12 +107,13 @@ async function crearPedido(e) {
 async function mostrarPedidosCliente() {
   const cedula = document.getElementById('cedula_cliente').value;
   try {
-    const res = await fetch(`http://localhost:3000/api/pedidos/cliente/${cedula}`);
-    if (!res.ok) throw new Error('Error al obtener pedidos');
-    const pedidos = await res.json();
-    renderPedidosTabla(pedidos);
+    // Cambiar la ruta para obtener matrículas por cédula
+    const res = await fetch(`http://localhost:3000/api/matricula/${cedula}`);
+    if (!res.ok) throw new Error('Error al obtener matrículas');
+    const matriculas = await res.json();
+    renderPedidosTabla(matriculas);
   } catch (err) {
-    console.error('Error al mostrar pedidos:', err);
+    console.error('Error al mostrar matrículas:', err);
   }
 }
 

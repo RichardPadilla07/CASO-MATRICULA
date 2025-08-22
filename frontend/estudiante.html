@@ -346,33 +346,32 @@
                 <div id="notificacion-pedido" class="notification success" style="display:none;margin-bottom:12px;">
                   ¡Pedido creado exitosamente!</div>
                 <div style="margin-bottom:16px;">
-                  <label for="cedula_cliente" style="color:#2575fc;font-weight:bold;">Cédula Cliente:</label><br>
+                  <label for="cedula_cliente" style="color:#2575fc;font-weight:bold;">Cédula Estudiante:</label><br>
                   <input type="text" id="cedula_cliente" name="cedula_cliente" required class="input-login"
                     style="margin-top:4px;background:#eaf3ff;color:#2575fc;font-weight:bold;" readonly>
                   <span id="cedulaClienteMsg" style="color:#d32f2f;font-size:14px;display:none;"></span>
                 </div>
                 <div style="margin-bottom:16px;">
-                  <label for="codigo_producto" style="color:#2575fc;font-weight:bold;">Código Producto:</label><br>
+                  <label for="codigo_producto" style="color:#2575fc;font-weight:bold;">Código Matricula de la
+                    materia:</label><br>
                   <input type="text" id="codigo_producto" name="codigo_producto" maxlength="20" required
                     class="input-login" style="margin-top:4px;">
                   <button type="button" id="buscarProducto" class="btn-login"
-                    style="margin-top:10px;width:100%;background:#2575fc;">Buscar producto</button>
+                    style="margin-top:10px;width:100%;background:#2575fc;">Buscar</button>
                 </div>
                 <div id="datosProducto"
                   style="display:none;background:#f3f3f3;padding:18px 16px;border-radius:12px;margin-bottom:16px;box-shadow:0 2px 8px rgba(106,17,203,0.08);">
-                  <div style="margin-bottom:8px;"><b style="color:#2575fc;">Nombre:</b> <span id="nombreProducto"
+                  <div style="margin-bottom:8px;"><b style="color:#2575fc;">Materia:</b> <span id="nombreProducto"
                       style="color:#444;"></span></div>
-                  <div style="margin-bottom:8px;"><b style="color:#2575fc;">Categoría:</b> <span id="categoriaProducto"
+                  <div style="margin-bottom:8px;"><b style="color:#2575fc;">Creditos:</b> <span id="creditosMateria"
                       style="color:#444;"></span></div>
-                  <div style="margin-bottom:8px;"><b style="color:#2575fc;">Precio:</b> $<span id="precioProducto"
+                  <div style="margin-bottom:8px;"><b style="color:#2575fc;">Codigo Materia:</b> <span id="codigoMateria"
                       style="color:#444;"></span></div>
-                  <div style="margin-bottom:8px;"><b style="color:#2575fc;">Stock:</b> <span id="stockProducto"
-                      style="color:#444;"></span></div>
-                  <div style="margin-bottom:8px;"><b style="color:#2575fc;">Cantidad:</b> <input type="number"
-                      id="cantidadProducto" min="1" value="1" style="width:60px;"> </div>
+                  <div style="margin-bottom:8px;"><b style="color:#2575fc;">Codigo Matricula:</b> <span
+                      id="codigoMatricula" style="color:#444;"></span></div>
                   <span id="productoMsg" style="color:#d32f2f;font-size:14px;display:none;"></span>
                 </div>
-                <button type="submit" class="btn-login" style="width:100%;margin-top:10px;">Crear Pedido</button>
+                <button type="submit" class="btn-login" style="width:100%;margin-top:10px;">Matricularse</button>
               </form>
               <button id="btn-carrusel-pedidos-der"
                 style="background:linear-gradient(90deg,#2575fc,#6a11cb);color:#fff;border:none;border-radius:50%;width:44px;height:44px;font-size:28px;cursor:pointer;flex-shrink:0;">&#8594;</button>
