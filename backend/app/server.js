@@ -7,6 +7,7 @@ import estudianteRoutes from "./routes/estudiante.routes.js";
 import carritoRoutes from "./routes/carrito.routes.js";
 import materiaRoutes from "./routes/materia.routes.js";
 import matriculaRoutes from "./routes/matricula.routes.js";
+import materiasGuardadasRoutes from "./routes/materiasGuardadas.routes.js";
 
 const app = express();
 
@@ -39,6 +40,7 @@ app.use("/api/estudiantes", estudianteRoutes);
 app.use("/api/carrito", carritoRoutes);
 app.use("/api/materias", materiaRoutes);
 app.use("/api/matriculas", matriculaRoutes);
+app.use("/api/materiasGuardadas", materiasGuardadasRoutes);
 
 // Configuración del servidor
 const PORT = process.env.PORT || 3000;

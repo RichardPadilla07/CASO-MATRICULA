@@ -233,7 +233,7 @@
       </div>
       <button id="btn-perfil" class="sidebar-btn">Perfil</button>
       <button id="btn-listar" class="sidebar-btn">Listar</button>
-      <button id="btn-carrito" class="sidebar-btn">Carrito</button>
+      <button id="btn-carrito" class="sidebar-btn">Materias Guardadas</button>
       <button id="btn-pedidos" class="sidebar-btn">Pedidos</button>
     </aside>
     <main>
@@ -275,21 +275,23 @@
           <h2 style="color:#2575fc;margin-bottom:10px;">Listar Productos</h2>
           <p style="margin-bottom:20px;color:#444;">En este modulo te permite ver todos las materias disponibles.</p>
           <div
-            style="overflow-x:auto;background:#fff;padding:20px;border-radius:16px;box-shadow:0 8px 32px rgba(106,17,203,0.08);">
-            <table style="min-width:700px;width:100%;">
-              <thead>
-                <tr>
-                  <th>N°</th>
-                  <th>Nombre</th>
-                  <th>Código</th>
-                  <th>Descripción</th>
-                  <th>Créditos</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody id="tabla-materias-body"></tbody>
-            </table>
-          </div>
+            <div style="background:#fff;padding:32px 28px;border-radius:16px;max-width:500px;width:90%;box-shadow:0 8px 32px rgba(106,17,203,0.15);position:relative;margin:auto;">
+              <h2 style="color:#2575fc;margin-bottom:10px;">Materias Guardadas</h2>
+              <p style="margin-bottom:20px;color:#444;">En este módulo puedes ver tus materias seleccionadas.</p>
+              <table style="min-width:400px;width:100%;margin-bottom:0;">
+                <thead>
+                  <tr style="background:linear-gradient(90deg,#d32f2f,#2575fc);color:#fff;">
+                    <th style="padding:10px;border-radius:8px 0 0 8px;">ID Materia</th>
+                    <th style="padding:10px;">Nombre</th>
+                    <th style="padding:10px;">Créditos</th>
+                    <th style="padding:10px;">Código Materia</th>
+                    <th style="padding:10px;">Código Matrícula</th>
+                    <th style="padding:10px;border-radius:0 8px 8px 0;">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="materias-guardadas-body"></tbody>
+              </table>
+            </div>
         </div>
       </section>
 
@@ -317,10 +319,10 @@
 
       <section id="seccion-carrito" style="display:none;position:relative;">
         <div id="carrito" style="min-height:300px;width:100%;max-width:700px;margin:auto;">
-          <h2 style="color:#2575fc;margin-bottom:10px;">Carrito</h2>
+          <h2 style="color:#2575fc;margin-bottom:10px;">Materias Guardadas</h2>
           <p style="margin-bottom:20px;color:#444;">En este modulo puedes ver tus materias seleccionadas.</p>
           <div id="carrito-lista" style="display:flex;flex-wrap:wrap;gap:20px;"></div>
-          <div id="carrito-vacio" style="color:#888;margin-top:20px;display:none;">No hay materias en el carrito.</div>
+          <div id="carrito-vacio" style="color:#888;margin-top:20px;display:none;">No hay materias guardadas aun.</div>
         </div>
       </section>
 
@@ -433,7 +435,7 @@
 </body>
 <script src="perfil/perfil.js"></script>
 <script src="listar/listar.js"></script>
-<script src="carrito/carrito.js"></script>
+<script src="guardarMateria/materiasGuardadas.js"></script>
 <script src="matriculas/matriculas.js"></script>
 <script>
   // Carrusel de pedidos con flechas en ambas vistas
