@@ -273,7 +273,7 @@
       <section id="seccion-listar" style="display:none;position:relative;">
         <div id="listar-productos" style="min-height:400px;width:100%;max-width:900px;margin:auto;">
           <h2 style="color:#2575fc;margin-bottom:10px;">Listar Productos</h2>
-          <p style="margin-bottom:20px;color:#444;">En este modulo te permite ver todos los productos disponibles.</p>
+          <p style="margin-bottom:20px;color:#444;">En este modulo te permite ver todos las materias disponibles.</p>
           <div
             style="overflow-x:auto;background:#fff;padding:20px;border-radius:16px;box-shadow:0 8px 32px rgba(106,17,203,0.08);">
             <table style="min-width:700px;width:100%;">
@@ -283,15 +283,11 @@
                   <th>Nombre</th>
                   <th>Código</th>
                   <th>Descripción</th>
-                  <th>Categoría</th>
-                  <th>Precio</th>
-                  <th>Stock</th>
-                  <th>Fecha ingreso</th>
-                  <th>Proveedor</th>
+                  <th>Créditos</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
-              <tbody id="tabla-productos-body"></tbody>
+              <tbody id="tabla-materias-body"></tbody>
             </table>
           </div>
         </div>
@@ -322,9 +318,9 @@
       <section id="seccion-carrito" style="display:none;position:relative;">
         <div id="carrito" style="min-height:300px;width:100%;max-width:700px;margin:auto;">
           <h2 style="color:#2575fc;margin-bottom:10px;">Carrito</h2>
-          <p style="margin-bottom:20px;color:#444;">En este modulo puedes ver tus productos seleccionados.</p>
+          <p style="margin-bottom:20px;color:#444;">En este modulo puedes ver tus materias seleccionadas.</p>
           <div id="carrito-lista" style="display:flex;flex-wrap:wrap;gap:20px;"></div>
-          <div id="carrito-vacio" style="color:#888;margin-top:20px;display:none;">No hay productos en el carrito.</div>
+          <div id="carrito-vacio" style="color:#888;margin-top:20px;display:none;">No hay materias en el carrito.</div>
         </div>
       </section>
 
@@ -332,7 +328,7 @@
         <div id="carrusel-pedidos" style="max-width:900px;margin:auto;">
           <div id="carrusel-gestion" style="display:block;">
             <h2 style="color:#2575fc;margin-bottom:10px;">Gestión de pedidos</h2>
-            <p style="margin-bottom:20px;color:#444;">En este modulo puedes realizar tus pedidos.</p>
+            <p style="margin-bottom:20px;color:#444;">En este modulo puedes realizar tus matriculas.</p>
             <div style="display:flex;align-items:center;justify-content:center;gap:24px;">
               <button id="btn-carrusel-pedidos-izq"
                 style="background:linear-gradient(90deg,#2575fc,#6a11cb);color:#fff;border:none;border-radius:50%;width:44px;height:44px;font-size:28px;cursor:pointer;flex-shrink:0;">&#8592;</button>
@@ -424,7 +420,7 @@
           <input type="text" name="direccion" placeholder="Dirección" maxlength="20" class="input-login">
           <input type="text" name="telefono" placeholder="Teléfono" maxlength="10" class="input-login">
           <input type="date" name="fecha_nacimiento" placeholder="Fecha de nacimiento" class="input-login">
-          <input type="password" name="passwordCliente" placeholder="Contraseña" required maxlength="30"
+          <input type="password" name="passwordEstudiante" placeholder="Contraseña" required maxlength="30"
             class="input-login">
           <button type="submit" class="btn-login" style="margin-top:10px;">Guardar cambios</button>
           <button type="button" id="btn-cerrar-modal-editar-cliente" class="btn-login"
@@ -438,7 +434,7 @@
 <script src="perfil/perfil.js"></script>
 <script src="listar/listar.js"></script>
 <script src="carrito/carrito.js"></script>
-<script src="pedidos/pedidos.js"></script>
+<script src="matriculas/matriculas.js"></script>
 <script>
   // Carrusel de pedidos con flechas en ambas vistas
   document.addEventListener('DOMContentLoaded', function () {

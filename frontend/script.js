@@ -98,15 +98,15 @@ async function handleClienteLogin(e) {
     return false;
   }
   try {
-    const res = await fetch('http://localhost:3000/api/clientes', {
+  const res = await fetch('http://localhost:3000/api/estudiantes', {
       method: 'GET'
     });
-    const clientes = await res.json();
-    const cliente = clientes.find(c => c.cedula == cedula && c.passwordCliente === passwordCliente);
-    if (cliente) {
+  const estudiantes = await res.json();
+  const estudiante = estudiantes.find(e => e.cedula == cedula && e.passwordEstudiante === passwordCliente);
+    if (estudiante) {
       showNotification('cliente-login-notif', 'Login exitoso. Redirigiendo...', 'success');
-      localStorage.setItem('cedulaCliente', cliente.cedula);
-      setTimeout(() => { window.location.href = 'cliente.html'; }, 1500);
+      localStorage.setItem('cedulaCliente', estudiante.cedula);
+      setTimeout(() => { window.location.href = 'estudiante.html'; }, 1500);
     } else {
       showNotification('cliente-login-notif', 'Credenciales incorrectas.', 'error');
     }
@@ -131,7 +131,7 @@ async function handleClienteRegister(e) {
     return false;
   }
   try {
-    const res = await fetch('http://localhost:3000/api/clientes', {
+  const res = await fetch('http://localhost:3000/api/estudiantes', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ cedula, nombre, apellido, ciudad, email, direccion, telefono, fecha_nacimiento, passwordCliente })

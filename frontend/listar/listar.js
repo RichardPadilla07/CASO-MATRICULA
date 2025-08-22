@@ -21,7 +21,7 @@ async function agregarAlCarrito(idProducto) {
 
 // Funcionalidad de listado de productos para cliente
 function renderProductosTabla(productos) {
-  const tbody = document.getElementById('tabla-productos-body');
+  const tbody = document.getElementById('tabla-materias-body');
   if (!tbody) return;
   tbody.innerHTML = '';
   productos.forEach((prod, idx) => {
@@ -31,11 +31,7 @@ function renderProductosTabla(productos) {
       <td>${prod.nombre}</td>
       <td>${prod.codigo}</td>
       <td>${prod.descripcion}</td>
-      <td>${prod.categoria}</td>
-      <td>${prod.precio}</td>
-      <td>${prod.stock}</td>
-      <td>${prod.fecha_ingreso ? prod.fecha_ingreso.substring(0, 10) : ''}</td>
-      <td>${prod.proveedor}</td>
+      <td>${prod.creditos}</td>
   <td><button class="btn-login" onclick="agregarAlCarrito('${prod._id}')">Agregar al carrito</button></td>
     `;
     tbody.appendChild(tr);
@@ -46,7 +42,7 @@ function renderProductosTabla(productos) {
 // Obtener productos del backend y renderizar tabla
 async function obtenerYListarProductos() {
   try {
-    const res = await fetch('http://localhost:3000/api/productos');
+  const res = await fetch('http://localhost:3000/api/materias');
     if (!res.ok) throw new Error('Error al obtener productos');
     const productos = await res.json();
     renderProductosTabla(productos);

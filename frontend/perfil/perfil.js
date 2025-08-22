@@ -20,7 +20,7 @@ function renderPerfilCliente(datosCliente) {
 
 // Renderizar saludo del cliente
 function renderSaludoCliente(datosCliente) {
-    const saludo = document.getElementById('cliente-nombre');
+    const saludo = document.getElementById('estudiante-nombre');
     if (saludo && datosCliente) {
         saludo.textContent = `${datosCliente.nombre || ''} ${datosCliente.apellido || ''}`;
     }
@@ -67,7 +67,7 @@ async function obtenerDatosCliente() {
     const cedula = localStorage.getItem('cedulaCliente') || localStorage.getItem('clienteCedula');
     if (!cedula) return;
     try {
-        const res = await fetch(`http://localhost:3000/api/clientes/${cedula}`);
+        const res = await fetch(`http://localhost:3000/api/estudiantes/${cedula}`);
         if (!res.ok) throw new Error('Error al obtener datos');
         const datosCliente = await res.json();
         renderPerfilCliente(datosCliente);
@@ -102,10 +102,10 @@ async function actualizarPerfil(e) {
         direccion: form.direccion.value,
         telefono: form.telefono.value,
         fecha_nacimiento: form.fecha_nacimiento.value,
-        passwordCliente: form.password.value
+        passwordEstudiante: form.password.value
     };
     try {
-        const res = await fetch(`http://localhost:3000/api/clientes/${cedula}`, {
+        const res = await fetch(`http://localhost:3000/api/estudiantes/${cedula}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(datos)
