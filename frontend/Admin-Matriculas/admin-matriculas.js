@@ -24,6 +24,9 @@ function mostrarMatriculas(matriculas) {
   const container = document.getElementById('matriculas-container');
   if (!container) return;
   container.innerHTML = '';
+  container.style.display = 'flex';
+  container.style.flexWrap = 'wrap';
+  container.style.gap = '24px';
   matriculas.forEach((matricula, idx) => {
     const card = document.createElement('div');
     card.className = 'matricula-tarjeta';
