@@ -15,7 +15,7 @@ const corsOptions = {
   origin: [
     "http://127.0.0.1:5500",
     "http://localhost:3000",
-    "https://casomatriculafrontend.netlify.app/" // <-- agrega aquí la URL de Netlify
+    "https://casomatriculafrontend.netlify.app" // <-- agrega aquí la URL de Netlify
   ],
   credentials: true
 };
