@@ -12,7 +12,7 @@ import materiasGuardadasRoutes from "./routes/materiasGuardadas.routes.js";
 const app = express();
 
 const corsOptions = {
-  origin: ["http://127.0.0.1:5500", "http://localhost:3000"], // agregar ruta frontend
+  origin: ["http://127.0.0.1:5500", "http://localhost:3000", "https://casomatriculafrontend.netlify.app"], // agregar ruta frontend
   credentials: true
 };
 app.use(cors(corsOptions));
