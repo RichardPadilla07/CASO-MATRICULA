@@ -19,43 +19,35 @@ const corsOptions = {
       "http://localhost:3000",
       "https://casomatriculafrontend.netlify.app"
     ];
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  credentials: true
-};
-app.use(cors(corsOptions));
+    app.use(cors({ origin: true, credentials: true }));
 
-// Servir archivos estáticos del frontend
-app.use(express.static(path.join(path.resolve(), '../../frontend')));
+    // Servir archivos estáticos del frontend
+    app.use(express.static(path.join(path.resolve(), '../../frontend')));
 
-// Redirigir todas las rutas que no sean API al index.html del frontend
-app.get(/^\/(?!api).*/, (req, res) => {
-  res.sendFile(path.join(path.resolve(), '../../frontend/index.html'));
-});
+    // Redirigir todas las rutas que no sean API al index.html del frontend
+    app.get(/^\/(?!api).*/, (req, res) => {
+      res.sendFile(path.join(path.resolve(), '../../frontend/index.html'));
+    });
 
-// Esto es para manejar las solicitudes JSON y URL-encoded
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+    // Esto es para manejar las solicitudes JSON y URL-encoded
+    app.use(express.json());
+    app.use(express.urlencoded({ extended: true }));
 
-// Ruta de inicio
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to bezkoder application." });
-});
+    // Ruta de inicio
+    app.get("/", (req, res) => {
+      res.json({ message: "Welcome to bezkoder application." });
+    });
 
-// Rutas de la API
-app.use("/api/usuarios", usuarioRoutes);
-app.use("/api/estudiantes", estudianteRoutes);
-// app.use("/api/carrito", carritoRoutes);
-app.use("/api/materias", materiaRoutes);
-app.use("/api/matriculas", matriculaRoutes);
-app.use("/api/materiasGuardadas", materiasGuardadasRoutes);
+    // Rutas de la API
+    app.use("/api/usuarios", usuarioRoutes);
+    app.use("/api/estudiantes", estudianteRoutes);
+    // app.use("/api/carrito", carritoRoutes);
+    app.use("/api/materias", materiaRoutes);
+    app.use("/api/matriculas", matriculaRoutes);
+    app.use("/api/materiasGuardadas", materiasGuardadasRoutes);
 
-// Configuración del servidor
-const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => {
-  console.log(` El servidor esta corriendo en el puerto ${PORT}.`);
-});
+    // Configuración del servidor
+    const PORT = process.env.PORT || 4000;
+    app.listen(PORT, () => {
+      console.log(` El servidor esta corriendo en el puerto ${PORT}.`);
+    });
