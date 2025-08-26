@@ -17,6 +17,7 @@
   "type": "module",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
     "express": "^4.21.2",
     "mongoose": "^8.17.2",
     "mysql2": "^3.14.3"

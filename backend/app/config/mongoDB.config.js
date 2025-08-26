@@ -2,8 +2,11 @@
 // Aquí se definen los parámetros de conexión (host, usuario, contraseña y nombre de la BD).
 
 // Configuración para MongoDB
+
+import dotenv from "dotenv";
+dotenv.config();
 const config = {
-  MONGO_URI: "mongodb+srv://richardpadilla3rod:guyfCzwcc9bsDVrF@cluster0.9ekun.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+  MONGO_URI: process.env.MONGO_URI
 };
 
 export default config;
