@@ -125,8 +125,8 @@ async function handleClienteRegister(e) {
   const direccion = document.getElementById('cliente-direccion').value.trim();
   const telefono = document.getElementById('cliente-telefono').value.trim();
   const fecha_nacimiento = document.getElementById('cliente-fecha-nacimiento').value;
-  const passwordCliente = document.getElementById('cliente-reg-password').value.trim();
-  if (!cedula || !nombre || !apellido || !ciudad || !email || !passwordCliente) {
+  const passwordEstudiante = document.getElementById('cliente-reg-password').value.trim();
+  if (!cedula || !nombre || !apellido || !ciudad || !email || !passwordEstudiante) {
     showNotification('cliente-register-notif', 'Completa los campos obligatorios.', 'error');
     return false;
   }
@@ -134,7 +134,7 @@ async function handleClienteRegister(e) {
   const res = await fetch('https://caso-matricula.onrender.com/api/estudiantes', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ cedula, nombre, apellido, ciudad, email, direccion, telefono, fecha_nacimiento, passwordCliente })
+      body: JSON.stringify({ cedula, nombre, apellido, ciudad, email, direccion, telefono, fecha_nacimiento, passwordEstudiante: passwordCliente })
     });
     if (res.ok) {
       showNotification('cliente-register-notif', 'Registro exitoso. Inicia sesión.', 'success');
