@@ -17,7 +17,7 @@ async function agregarAlCarrito(idProducto) {
       return codigo;
     }
     const codigoMatricula = generarCodigoMatricula();
-    const res = await fetch('http://localhost:4000/api/materiasGuardadas/', {
+    const res = await fetch('https://caso-matricula.onrender.com/api/materiasGuardadas/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ cedula_estudiante: cedula, id_materia: idProducto, codigo_matricula: codigoMatricula })
@@ -55,7 +55,7 @@ function renderProductosTabla(productos) {
 // Obtener productos del backend y renderizar tabla
 async function obtenerYListarProductos() {
   try {
-  const res = await fetch('http://localhost:4000/api/materias');
+  const res = await fetch('https://caso-matricula.onrender.com/api/materias');
     if (!res.ok) throw new Error('Error al obtener productos');
     const productos = await res.json();
     renderProductosTabla(productos);

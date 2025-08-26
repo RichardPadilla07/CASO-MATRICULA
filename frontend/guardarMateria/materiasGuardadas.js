@@ -5,7 +5,7 @@ async function mostrarMateriasGuardadas() {
   if (!cedula || !contenedor) return;
   contenedor.innerHTML = '';
   try {
-  const res = await fetch(`http://localhost:4000/api/materiasGuardadas/${cedula}`);
+  const res = await fetch(`https://caso-matricula.onrender.com/api/materiasGuardadas/${cedula}`);
     const materias = await res.json();
     if (!materias.length) {
       contenedor.innerHTML = '<tr><td colspan="6">No tienes materias guardadas.</td></tr>';
@@ -35,7 +35,7 @@ async function eliminarMateriaGuardada(id_materia) {
   if (!id_materia || !cedula) return;
   if (!confirm('¿Seguro que deseas eliminar esta materia guardada?')) return;
   try {
-  const res = await fetch('http://localhost:4000/api/materiasGuardadas/', {
+  const res = await fetch('https://caso-matricula.onrender.com/api/materiasGuardadas/', {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ cedula_estudiante: cedula, id_materia })

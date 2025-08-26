@@ -1,7 +1,7 @@
 // Script para la gestión y creación de clientes en el panel de administración.
 // Aquí se definen funciones para el CRUD de clientes.
 // Puedes modificar la lógica, nombres de funciones o variables según la temática o cambios futuros en el proyecto.
-const API_ESTUDIANTES = 'http://localhost:4000/api/estudiantes';
+const API_ESTUDIANTES = 'https://caso-matricula.onrender.com/api/estudiantes';
 // Cargar estudiantes
 async function cargarEstudiantes() {
   const tbody = document.getElementById('tabla-clientes-body');
