@@ -12,11 +12,19 @@ import materiasGuardadasRoutes from "./routes/materiasGuardadas.routes.js";
 const app = express();
 
 const corsOptions = {
-  origin: [
-    "http://127.0.0.1:5500",
-    "http://localhost:3000",
-    "https://casomatriculafrontend.netlify.app" // <-- agrega aquí la URL de Netlify
-  ],
+  origin: function (origin, callback) {
+    // Permite peticiones desde Netlify y localhost
+    const allowedOrigins = [
+      "http://127.0.0.1:5500",
+      "http://localhost:3000",
+      "https://casomatriculafrontend.netlify.app"
+    ];
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true
 };
 app.use(cors(corsOptions));
