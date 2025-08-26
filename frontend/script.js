@@ -134,7 +134,7 @@ async function handleClienteRegister(e) {
   const res = await fetch('https://caso-matricula.onrender.com/api/estudiantes', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ cedula, nombre, apellido, ciudad, email, direccion, telefono, fecha_nacimiento, passwordEstudiante})
+      body: JSON.stringify({ cedula, nombre, apellido, ciudad, email, direccion, telefono, fecha_nacimiento, passwordEstudiante: passwordCliente})
     });
     if (res.ok) {
       showNotification('cliente-register-notif', 'Registro exitoso. Inicia sesión.', 'success');
