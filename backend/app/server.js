@@ -4,6 +4,7 @@ import cors from "cors";
 import path from "path";
 import usuarioRoutes from "./routes/usuario.routes.js";
 import estudianteRoutes from "./routes/estudiante.routes.js";
+// import carritoRoutes from "./routes/carrito.routes.js";
 import materiaRoutes from "./routes/materia.routes.js";
 import matriculaRoutes from "./routes/matricula.routes.js";
 import materiasGuardadasRoutes from "./routes/materiasGuardadas.routes.js";
@@ -25,13 +26,7 @@ const corsOptions = {
   },
   credentials: true
 };
-
-// 2. Usar CORS antes de cualquier otro middleware o ruta
 app.use(cors(corsOptions));
-
-// Esto es para manejar las solicitudes JSON y URL-encoded
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 // Servir archivos estáticos del frontend
 app.use(express.static(path.join(path.resolve(), '../../frontend')));
@@ -41,6 +36,10 @@ app.get(/^\/(?!api).*/, (req, res) => {
   res.sendFile(path.join(path.resolve(), '../../frontend/index.html'));
 });
 
+// Esto es para manejar las solicitudes JSON y URL-encoded
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // Ruta de inicio
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to bezkoder application." });
@@ -49,6 +48,7 @@ app.get("/", (req, res) => {
 // Rutas de la API
 app.use("/api/usuarios", usuarioRoutes);
 app.use("/api/estudiantes", estudianteRoutes);
+// app.use("/api/carrito", carritoRoutes);
 app.use("/api/materias", materiaRoutes);
 app.use("/api/matriculas", matriculaRoutes);
 app.use("/api/materiasGuardadas", materiasGuardadasRoutes);

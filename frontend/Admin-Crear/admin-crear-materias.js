@@ -3,7 +3,7 @@
 // Puedes modificar la lógica, nombres de funciones o variables según la temática o cambios futuros en el proyecto.
 
 // API para materias
-const API_URL = 'https://caso-matricula.onrender.com/api/materias';
+const API_URL_MATERIAS = 'https://caso-matricula.onrender.com/api/materias';
 
 // Cargar productos
 document.addEventListener('DOMContentLoaded', () => {
@@ -16,7 +16,7 @@ async function cargarProductos() {
   const tbody = document.getElementById('tabla-productos-body');
   tbody.innerHTML = '';
   try {
-    const res = await fetch(API_URL);
+    const res = await fetch(API_URL_MATERIAS);
     const productos = await res.json();
     productos.forEach((prod, idx) => {
       const tr = document.createElement('tr');
@@ -24,8 +24,12 @@ async function cargarProductos() {
         <td>${idx + 1}</td>
         <td>${prod.nombre}</td>
         <td>${prod.codigo}</td>
-        <td>${prod.descripcion ? prod.descripcion : 'N/A'}</td>
-        <td>${prod.creditos ? prod.creditos : 'N/A'}</td>
+        <td>${prod.descripcion || ''}</td>
+        <td>${prod.categoria || ''}</td>
+        <td>${prod.precio}</td>
+        <td>${prod.stock}</td>
+        <td>${prod.fecha_ingreso ? prod.fecha_ingreso.substring(0, 10) : ''}</td>
+        <td>${prod.proveedor || ''}</td>
         <td style="display:flex;gap:8px;justify-content:center;align-items:center;">
           <button onclick="editarProducto('${prod._id}')">✏️</button>
           <button onclick="eliminarProducto('${prod._id}')">🗑️</button>

@@ -4,23 +4,23 @@
 // CRUD de productos para el panel admin
 const API_URL = 'https://caso-matricula.onrender.com/api/materias';
 
-async function cargarProductos() {
-  const tbody = document.getElementById('tabla-productos-body');
+async function cargarMaterias() {
+  const tbody = document.getElementById('tabla-materias-body');
   tbody.innerHTML = '';
   try {
     const res = await fetch(API_URL);
-    const productos = await res.json();
-    productos.forEach((prod, idx) => {
+    const materias = await res.json();
+    materias.forEach((mat, idx) => {
       const tr = document.createElement('tr');
       tr.innerHTML = `
         <td>${idx + 1}</td>
-        <td>${prod.nombre}</td>
-        <td>${prod.codigo}</td>
-        <td>${prod.descripcion ? prod.descripcion : 'N/A'}</td>
-        <td>${prod.creditos ? prod.creditos : 'N/A'}</td>
+        <td>${mat.nombre}</td>
+        <td>${mat.codigo}</td>
+        <td>${mat.descripcion || ''}</td>
+          <td>${mat.creditos || ''}</td>
         <td style="display:flex;gap:8px;justify-content:center;align-items:center;">
-            <button onclick="editarProducto('${prod._id}')">✏️</button>
-            <button onclick="eliminarProducto('${prod._id}')">🗑️</button>
+            <button onclick="editarMateria('${mat._id}')">✏️</button>
+            <button onclick="eliminarMateria('${mat._id}')">🗑️</button>
         </td>
       `;
       tbody.appendChild(tr);
@@ -30,72 +30,57 @@ async function cargarProductos() {
   }
 }
 
-async function handleCrearProducto(e) {
+async function handleCrearMateria(e) {
   e.preventDefault();
   const form = e.target;
-  const nombre = form.nombre.value.trim();
-  const codigo = form.codigo.value.trim();
-  const descripcion = form.descripcion.value.trim();
-  const creditos = parseInt(form.creditos.value);
-  if (!nombre || !codigo || !descripcion || isNaN(creditos) || creditos < 1) {
-    alert('Por favor, completa todos los campos correctamente.');
-    return;
-  }
-  const datos = { nombre, codigo, descripcion, creditos };
+  const datos = {
+    nombre: form.nombre.value.trim(),
+    codigo: form.codigo.value.trim(),
+    descripcion: form.descripcion.value.trim(),
+    creditos: parseInt(form.creditos.value)
+  };
   try {
     const res = await fetch(API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(datos)
     });
-    const result = await res.json();
     if (res.ok) {
       form.reset();
       cargarProductos();
-      alert('Materia creada correctamente');
+      alert('Producto creado correctamente');
     } else {
-      alert('Error al crear materia: ' + (result.error || 'Datos inválidos'));
+      alert('Error al crear producto');
     }
-  } catch (err) {
-    alert('Error de conexión: ' + err.message);
-    console.error('Error POST:', err);
-  }
-}
-
-window.eliminarProducto = async function (id) {
-  if (!confirm('¿Seguro que deseas eliminar este producto?')) return;
-  try {
-    const res = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
-    if (res.ok) cargarProductos();
-    else alert('Error al eliminar producto');
   } catch (err) {
     alert('Error de conexión');
   }
 }
 
-window.editarProducto = async function (id) {
+window.eliminarMateria = async function(id) {
+  if (!confirm('¿Seguro que deseas eliminar esta materia?')) return;
   try {
-    console.log('Editar materia, id:', id);
+    const res = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+    if (res.ok) cargarMaterias();
+    else alert('Error al eliminar materia');
+  } catch (err) {
+    alert('Error de conexión');
+  }
+}
+
+window.editarMateria = async function(id) {
+  try {
     const res = await fetch(`${API_URL}/${id}`);
-    console.log('Respuesta fetch GET:', res);
-    if (!res.ok) {
-      alert('No se pudo obtener la materia. Código de estado: ' + res.status);
-      return;
-    }
-    const prod = await res.json();
-    console.log('Materia recibida:', prod);
-    const modal = document.getElementById('modal-editar-producto');
-    const form = document.getElementById('form-editar-producto');
-    if (!modal || !form) {
-      alert('No se encontró el modal o el formulario de edición.');
-      return;
-    }
-    form.nombre.value = prod.nombre || '';
-    form.codigo.value = prod.codigo || '';
-    form.descripcion.value = prod.descripcion || '';
-    form.creditos.value = prod.creditos || '';
+    if (!res.ok) return alert('No se pudo obtener la materia');
+    const materia = await res.json();
+    const modal = document.getElementById('modal-editar-materia');
+    const form = document.getElementById('form-editar-materia');
+  form.nombre.value = materia.nombre || '';
+  form.codigo.value = materia.codigo || '';
+  form.descripcion.value = materia.descripcion || '';
+  form.creditos.value = materia.creditos || '';
     modal.style.display = 'flex';
-    form.onsubmit = async function (e) {
+    form.onsubmit = async function(e) {
       e.preventDefault();
       const datos = {
         nombre: form.nombre.value.trim(),
@@ -103,37 +88,33 @@ window.editarProducto = async function (id) {
         descripcion: form.descripcion.value.trim(),
         creditos: parseInt(form.creditos.value)
       };
-      console.log('Datos a actualizar:', datos);
       try {
         const res = await fetch(`${API_URL}/${id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(datos)
         });
-        console.log('Respuesta fetch PUT:', res);
         if (res.ok) {
           modal.style.display = 'none';
-          cargarProductos();
+          cargarMaterias();
           alert('Materia actualizada correctamente');
         } else {
-          alert('Error al actualizar materia. Código de estado: ' + res.status);
+          alert('Error al actualizar producto');
         }
       } catch (err) {
-        alert('Error de conexión al actualizar materia: ' + err.message);
-        console.error('Error PUT:', err);
+        alert('Error de conexión');
       }
     };
     document.getElementById('btn-cerrar-modal-editar').onclick = () => {
       modal.style.display = 'none';
     };
   } catch (err) {
-    alert('Error de conexión al obtener materia: ' + err.message);
-    console.error('Error GET:', err);
+    alert('Error de conexión');
   }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  cargarProductos();
-  const formProducto = document.getElementById('form-producto');
-  if (formProducto) formProducto.onsubmit = handleCrearProducto;
+  cargarMaterias();
+  const formMateria = document.getElementById('form-materia');
+  if (formMateria) formMateria.onsubmit = handleCrearMateria;
 });

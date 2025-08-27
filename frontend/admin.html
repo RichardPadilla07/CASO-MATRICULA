@@ -288,7 +288,7 @@
                       <th>Acciones</th>
                     </tr>
                   </thead>
-                  <tbody id="tabla-productos-body"></tbody>
+                  <tbody id="tabla-materias-body"></tbody>
                 </table>
               </div>
             </div>
@@ -332,7 +332,7 @@
             <input type="text" name="nombre" placeholder="Nombre" required maxlength="10" class="input-login">
             <input type="text" name="codigo" placeholder="Código" required maxlength="20" class="input-login">
             <input type="text" name="descripcion" placeholder="Descripción" maxlength="30" class="input-login">
-            <input type="number" name="creditos" placeholder="Créditos" maxlength="20" class="input-login">
+            <input type="number" name="credito" placeholder="Créditos" maxlength="20" class="input-login">
             <button type="submit" class="btn-login" style="margin-top:10px;">Guardar cambios</button>
             <button type="button" id="btn-cerrar-modal-editar" class="btn-login"
               style="background:#d32f2f;margin-top:10px;">Cancelar</button>
@@ -350,11 +350,10 @@
               <h2 class="form-title">Crear materia</h2>
               <p style="margin-bottom:20px;color:#444;">Completa el formulario para agregar una nueva materia.</p>
               <form id="form-materia" style="margin-bottom:20px;max-width:500px;">
-                <input type="text" name="nombre" placeholder="Nombre" required maxlength="30" class="input-login">
-                <input type="text" name="codigo" placeholder="Código" required maxlength="6" class="input-login">
-                <input type="text" name="descripcion" placeholder="Descripción" maxlength="30" class="input-login">
-                <input type="number" name="creditos" placeholder="Créditos" required min="1" max="20"
-                  class="input-login">
+                <input type="text" name="nombre" placeholder="Nombre" required maxlength="50" class="input-login">
+                <input type="text" name="codigo" placeholder="Código" required maxlength="20" class="input-login">
+                <input type="text" name="descripcion" placeholder="Descripción" maxlength="100" class="input-login">
+                <input type="number" name="creditos" placeholder="Créditos" required min="1" max="20" class="input-login">
                 <button type="submit" class="btn-login">Crear materia</button>
               </form>
             </div>
@@ -419,9 +418,8 @@
   <script src="Admin-Perfil/admin-perfil.js"></script>
   <script src="Admin-Crear/admin-crear-estudiantes.js"></script>
   <script src="Admin-Crear/admin-crear-materias.js"></script>
-  <script src="Admin-Listar/admin-listar-materias.js"></script>
-  <script src="Admin-Listar/admin-listar-estudiantes.js"></script>
   <script src="Admin-Matriculas/admin-matriculas.js"></script>
+  <script src="Admin-Listar/admin-listar-materias.js"></script>
 </body>
 
 </html>
