@@ -98,11 +98,11 @@ async function handleClienteLogin(e) {
     return false;
   }
   try {
-  const res = await fetch('https://caso-matricula.onrender.com/api/estudiantes', {
+    const res = await fetch('https://caso-matricula.onrender.com/api/estudiantes', {
       method: 'GET'
     });
-  const estudiantes = await res.json();
-  const estudiante = estudiantes.find(e => e.cedula == cedula && e.passwordEstudiante === passwordCliente);
+    const estudiantes = await res.json();
+    const estudiante = estudiantes.find(e => e.cedula == cedula && e.passwordEstudiante === passwordCliente);
     if (estudiante) {
       showNotification('cliente-login-notif', 'Login exitoso. Redirigiendo...', 'success');
       localStorage.setItem('cedulaCliente', estudiante.cedula);
@@ -131,10 +131,10 @@ async function handleClienteRegister(e) {
     return false;
   }
   try {
-  const res = await fetch('https://caso-matricula.onrender.com/api/estudiantes', {
+    const res = await fetch('https://caso-matricula.onrender.com/api/estudiantes', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ cedula, nombre, apellido, ciudad, email, direccion, telefono, fecha_nacimiento, passwordEstudiante: passwordCliente})
+      body: JSON.stringify({ cedula, nombre, apellido, ciudad, email, direccion, telefono, fecha_nacimiento, passwordEstudiante: passwordCliente })
     });
     if (res.ok) {
       showNotification('cliente-register-notif', 'Registro exitoso. Inicia sesión.', 'success');
@@ -145,7 +145,7 @@ async function handleClienteRegister(e) {
         const data = await res.json();
         if (typeof data.error === 'string') errorMsg = data.error;
         else if (typeof data.error === 'object' && data.error.message) errorMsg = data.error.message;
-      } catch (e) {}
+      } catch (e) { }
       showNotification('cliente-register-notif', errorMsg, 'error');
     }
   } catch (err) {
