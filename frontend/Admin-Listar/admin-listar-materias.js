@@ -33,27 +33,32 @@ async function cargarProductos() {
 async function handleCrearProducto(e) {
   e.preventDefault();
   const form = e.target;
-  const datos = {
-    nombre: form.nombre.value.trim(),
-    codigo: form.codigo.value.trim(),
-    descripcion: form.descripcion.value.trim(),
-    creditos: parseInt(form.creditos.value)
-  };
+  const nombre = form.nombre.value.trim();
+  const codigo = form.codigo.value.trim();
+  const descripcion = form.descripcion.value.trim();
+  const creditos = parseInt(form.creditos.value);
+  if (!nombre || !codigo || !descripcion || isNaN(creditos) || creditos < 1) {
+    alert('Por favor, completa todos los campos correctamente.');
+    return;
+  }
+  const datos = { nombre, codigo, descripcion, creditos };
   try {
     const res = await fetch(API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(datos)
     });
+    const result = await res.json();
     if (res.ok) {
       form.reset();
       cargarProductos();
-      alert('Producto creado correctamente');
+      alert('Materia creada correctamente');
     } else {
-      alert('Error al crear producto');
+      alert('Error al crear materia: ' + (result.error || 'Datos inválidos'));
     }
   } catch (err) {
-    alert('Error de conexión');
+    alert('Error de conexión: ' + err.message);
+    console.error('Error POST:', err);
   }
 }
 
