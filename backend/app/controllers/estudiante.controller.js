@@ -34,16 +34,10 @@ export const create = async (req, res) => {
     if (existe) {
       return res.status(400).json({ error: 'Ya existe un cliente con esa cédula o correo.' });
     }
-    // Encriptar la contraseña antes de guardar
-    const bcrypt = await import('bcryptjs');
-    let body = { ...req.body };
-    if (body.passwordEstudiante) {
-      const salt = await bcrypt.genSalt(10);
-      body.passwordEstudiante = await bcrypt.hash(body.passwordEstudiante, salt);
-    }
-    const cliente = new Cliente(body);
-    await cliente.save();
-    res.json(cliente);
+  // Guardar la contraseña tal cual se recibe
+  const cliente = new Cliente(req.body);
+  await cliente.save();
+  res.json(cliente);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
