@@ -39,7 +39,7 @@ async function cargarProductos() {
       tbody.appendChild(tr);
     });
   } catch (err) {
-    tbody.innerHTML = '<tr><td colspan="10">Error al cargar productos</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="10">Error al cargar materias</td></tr>';
   }
 }
 
@@ -78,11 +78,11 @@ async function handleCrearMateria(e) {
 
 // Eliminar producto
 window.eliminarProducto = async function (id) {
-  if (!confirm('¿Seguro que deseas eliminar este producto?')) return;
+  if (!confirm('¿Seguro que deseas eliminar esta materia?')) return;
   try {
     const res = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
     if (res.ok) cargarProductos();
-    else alert('Error al eliminar producto');
+    else alert('Error al eliminar la materia');
   } catch (err) {
     alert('Error de conexión');
   }
@@ -92,7 +92,7 @@ window.eliminarProducto = async function (id) {
 window.editarProducto = async function (id) {
   try {
     const res = await fetch(`${API_URL}/${id}`);
-    if (!res.ok) return alert('No se pudo obtener el producto');
+    if (!res.ok) return alert('No se pudo obtener la materia');
     const prod = await res.json();
     const modal = document.getElementById('modal-editar-producto');
     const form = document.getElementById('form-editar-producto');
@@ -126,9 +126,9 @@ window.editarProducto = async function (id) {
         if (res.ok) {
           modal.style.display = 'none';
           cargarProductos();
-          alert('Producto actualizado correctamente');
+          alert('Materia actualizada correctamente');
         } else {
-          alert('Error al actualizar producto');
+          alert('Error al actualizar materia');
         }
       } catch (err) {
         alert('Error de conexión');

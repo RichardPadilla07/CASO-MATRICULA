@@ -56,11 +56,11 @@ function renderProductosTabla(productos) {
 async function obtenerYListarProductos() {
   try {
   const res = await fetch('https://caso-matricula.onrender.com/api/materias');
-    if (!res.ok) throw new Error('Error al obtener productos');
+    if (!res.ok) throw new Error('Error al obtener la materia');
     const productos = await res.json();
     renderProductosTabla(productos);
   } catch (err) {
-    console.error('Error al listar productos:', err);
+    console.error('Error al listar materias:', err);
   }
 }
 

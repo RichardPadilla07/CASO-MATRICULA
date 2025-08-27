@@ -102,15 +102,15 @@ window.cambiarEstadoPedido = async function (id, nuevoEstado) {
 
 // Eliminar pedido
 window.eliminarPedido = async function (id) {
-  if (!confirm('¿Seguro que deseas eliminar este pedido?')) return;
+  if (!confirm('¿Seguro que deseas eliminar esta matricula?')) return;
   try {
     const res = await fetch(`${API_PEDIDOS}/${id}`, {
       method: 'DELETE'
     });
     if (res.ok) obtenerPedidos();
-    else alert('Error al eliminar pedido');
+    else alert('Error al eliminar matricula');
   } catch (error) {
-    console.error('Error al eliminar pedido:', error);
+    console.error('Error al eliminar matricula:', error);
   }
 }
 

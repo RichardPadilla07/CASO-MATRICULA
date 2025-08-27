@@ -48,9 +48,9 @@ async function handleCrearMateria(e) {
     if (res.ok) {
       form.reset();
       cargarProductos();
-      alert('Producto creado correctamente');
+      alert('Materia creada correctamente');
     } else {
-      let msg = 'Error al crear producto';
+      let msg = 'Error al crear materia';
       try {
         const data = await res.json();
         if (data && data.error) msg = data.error;
@@ -105,7 +105,7 @@ window.editarMateria = async function (id) {
           cargarMaterias();
           alert('Materia actualizada correctamente');
         } else {
-          alert('Error al actualizar producto');
+          alert('Error al actualizar la materia');
         }
       } catch (err) {
         alert('Error de conexión');

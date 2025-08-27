@@ -9,7 +9,7 @@ export const getByCedula = async (req, res) => {
   try {
     const { cedula } = req.params;
     const cliente = await Cliente.findOne({ cedula });
-    if (!cliente) return res.status(404).json({ error: 'Cliente no encontrado' });
+    if (!cliente) return res.status(404).json({ error: 'Estudiante no encontrado' });
     res.json(cliente);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -48,7 +48,7 @@ export const update = async (req, res) => {
   try {
     const { cedula } = req.params;
     const cliente = await Cliente.findOneAndUpdate({ cedula }, req.body, { new: true });
-    if (!cliente) return res.status(404).json({ error: 'Cliente no encontrado' });
+    if (!cliente) return res.status(404).json({ error: 'Estudiante no encontrado' });
     res.json(cliente);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -60,8 +60,8 @@ export const remove = async (req, res) => {
   try {
     const { cedula } = req.params;
     const cliente = await Cliente.findOneAndDelete({ cedula });
-    if (!cliente) return res.status(404).json({ error: 'Cliente no encontrado' });
-    res.json({ message: 'Cliente eliminado' });
+    if (!cliente) return res.status(404).json({ error: 'Estudiante no encontrado' });
+    res.json({ message: 'Estudiante eliminado' });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
