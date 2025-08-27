@@ -31,11 +31,12 @@ export const getMaterias = async (req, res) => {
   }
 };
 
-export const getMateriaById = async (req, res) => {
+// Obtener materia por ID
+export const getById = async (req, res) => {
   try {
-    const materia = await Materia.findById(req.params.id);
-    if (!materia) return res.status(404).json({ error: "Materia not found" });
-    res.json(materia);
+    const producto = await Materia.findById(req.params.id);
+    if (!producto) return res.status(404).json({ error: "Materia not found" });
+    res.json(producto);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
