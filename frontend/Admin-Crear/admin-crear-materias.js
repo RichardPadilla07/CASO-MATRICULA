@@ -53,7 +53,7 @@ async function handleCrearMateria(e) {
     creditos: parseInt(form.creditos.value)
   };
   try {
-    const res = await fetch(API_URL, {
+  const res = await fetch(API_URL_MATERIAS, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(materia)
