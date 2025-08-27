@@ -13,7 +13,7 @@ const estudianteSchema = new mongoose.Schema({
   direccion: { type: String, maxlength: 20 },
   telefono: { type: String, maxlength: 10 },
   fecha_nacimiento: { type: Date },
-  passwordEstudiante: { type: String, maxlength: 30 }
+  passwordEstudiante: { type: String }
 });
 
 const Estudiante = mongoose.model("Estudiante", estudianteSchema);
