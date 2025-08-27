@@ -57,7 +57,7 @@ async function handleCrearMateria(e) {
   }
 }
 
-window.eliminarMateria = async function(id) {
+window.eliminarMateria = async function (id) {
   if (!confirm('¿Seguro que deseas eliminar esta materia?')) return;
   try {
     const res = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
@@ -68,19 +68,19 @@ window.eliminarMateria = async function(id) {
   }
 }
 
-window.editarMateria = async function(id) {
+window.editarMateria = async function (id) {
   try {
     const res = await fetch(`${API_URL}/${id}`);
     if (!res.ok) return alert('No se pudo obtener la materia');
     const materia = await res.json();
     const modal = document.getElementById('modal-editar-materia');
     const form = document.getElementById('form-editar-materia');
-  form.nombre.value = materia.nombre || '';
-  form.codigo.value = materia.codigo || '';
-  form.descripcion.value = materia.descripcion || '';
-  form.creditos.value = materia.creditos || '';
+    form.nombre.value = materia.nombre || '';
+    form.codigo.value = materia.codigo || '';
+    form.descripcion.value = materia.descripcion || '';
+    form.creditos.value = materia.creditos || '';
     modal.style.display = 'flex';
-    form.onsubmit = async function(e) {
+    form.onsubmit = async function (e) {
       e.preventDefault();
       const datos = {
         nombre: form.nombre.value.trim(),
