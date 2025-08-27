@@ -4,23 +4,23 @@
 // CRUD de productos para el panel admin
 const API_URL = 'https://caso-matricula.onrender.com/api/materias';
 
-async function cargarMaterias() {
-  const tbody = document.getElementById('tabla-materias-body');
+async function cargarProductos() {
+  const tbody = document.getElementById('tabla-productos-body');
   tbody.innerHTML = '';
   try {
     const res = await fetch(API_URL);
-    const materias = await res.json();
-    materias.forEach((mat, idx) => {
+    const productos = await res.json();
+    productos.forEach((prod, idx) => {
       const tr = document.createElement('tr');
       tr.innerHTML = `
         <td>${idx + 1}</td>
-        <td>${mat.nombre}</td>
-        <td>${mat.codigo}</td>
-        <td>${mat.descripcion || ''}</td>
-          <td>${mat.creditos || ''}</td>
+        <td>${prod.nombre}</td>
+        <td>${prod.codigo}</td>
+        <td>${prod.descripcion || ''}</td>
+        <td>${prod.creditos || ''}</td>
         <td style="display:flex;gap:8px;justify-content:center;align-items:center;">
-            <button onclick="editarMateria('${mat._id}')">✏️</button>
-            <button onclick="eliminarMateria('${mat._id}')">🗑️</button>
+            <button onclick="editarProducto('${prod._id}')">✏️</button>
+            <button onclick="eliminarProducto('${prod._id}')">🗑️</button>
         </td>
       `;
       tbody.appendChild(tr);
@@ -30,7 +30,7 @@ async function cargarMaterias() {
   }
 }
 
-async function handleCrearMateria(e) {
+async function handleCrearProducto(e) {
   e.preventDefault();
   const form = e.target;
   const datos = {
@@ -57,30 +57,30 @@ async function handleCrearMateria(e) {
   }
 }
 
-window.eliminarMateria = async function(id) {
-  if (!confirm('¿Seguro que deseas eliminar esta materia?')) return;
+window.eliminarProducto = async function (id) {
+  if (!confirm('¿Seguro que deseas eliminar este producto?')) return;
   try {
     const res = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
-    if (res.ok) cargarMaterias();
-    else alert('Error al eliminar materia');
+    if (res.ok) cargarProductos();
+    else alert('Error al eliminar producto');
   } catch (err) {
     alert('Error de conexión');
   }
 }
 
-window.editarMateria = async function(id) {
+window.editarProducto = async function (id) {
   try {
     const res = await fetch(`${API_URL}/${id}`);
-    if (!res.ok) return alert('No se pudo obtener la materia');
-    const materia = await res.json();
-    const modal = document.getElementById('modal-editar-materia');
-    const form = document.getElementById('form-editar-materia');
-  form.nombre.value = materia.nombre || '';
-  form.codigo.value = materia.codigo || '';
-  form.descripcion.value = materia.descripcion || '';
-  form.creditos.value = materia.creditos || '';
+    if (!res.ok) return alert('No se pudo obtener el producto');
+    const prod = await res.json();
+    const modal = document.getElementById('modal-editar-producto');
+    const form = document.getElementById('form-editar-producto');
+    form.nombre.value = prod.nombre || '';
+    form.codigo.value = prod.codigo || '';
+    form.descripcion.value = prod.descripcion || '';
+    form.creditos.value = prod.creditos || '';
     modal.style.display = 'flex';
-    form.onsubmit = async function(e) {
+    form.onsubmit = async function (e) {
       e.preventDefault();
       const datos = {
         nombre: form.nombre.value.trim(),
@@ -96,8 +96,8 @@ window.editarMateria = async function(id) {
         });
         if (res.ok) {
           modal.style.display = 'none';
-          cargarMaterias();
-          alert('Materia actualizada correctamente');
+          cargarProductos();
+          alert('Producto actualizado correctamente');
         } else {
           alert('Error al actualizar producto');
         }
@@ -114,7 +114,7 @@ window.editarMateria = async function(id) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  cargarMaterias();
-  const formMateria = document.getElementById('form-materia');
-  if (formMateria) formMateria.onsubmit = handleCrearMateria;
+  cargarProductos();
+  const formProducto = document.getElementById('form-producto');
+  if (formProducto) formProducto.onsubmit = handleCrearProducto;
 });
