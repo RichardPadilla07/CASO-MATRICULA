@@ -70,11 +70,21 @@ window.eliminarProducto = async function (id) {
 
 window.editarProducto = async function (id) {
   try {
+    console.log('Editar materia, id:', id);
     const res = await fetch(`${API_URL}/${id}`);
-    if (!res.ok) return alert('No se pudo obtener el producto');
+    console.log('Respuesta fetch GET:', res);
+    if (!res.ok) {
+      alert('No se pudo obtener la materia. Código de estado: ' + res.status);
+      return;
+    }
     const prod = await res.json();
+    console.log('Materia recibida:', prod);
     const modal = document.getElementById('modal-editar-producto');
     const form = document.getElementById('form-editar-producto');
+    if (!modal || !form) {
+      alert('No se encontró el modal o el formulario de edición.');
+      return;
+    }
     form.nombre.value = prod.nombre || '';
     form.codigo.value = prod.codigo || '';
     form.descripcion.value = prod.descripcion || '';
@@ -88,28 +98,32 @@ window.editarProducto = async function (id) {
         descripcion: form.descripcion.value.trim(),
         creditos: parseInt(form.creditos.value)
       };
+      console.log('Datos a actualizar:', datos);
       try {
         const res = await fetch(`${API_URL}/${id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(datos)
         });
+        console.log('Respuesta fetch PUT:', res);
         if (res.ok) {
           modal.style.display = 'none';
           cargarProductos();
-          alert('Producto actualizado correctamente');
+          alert('Materia actualizada correctamente');
         } else {
-          alert('Error al actualizar producto');
+          alert('Error al actualizar materia. Código de estado: ' + res.status);
         }
       } catch (err) {
-        alert('Error de conexión');
+        alert('Error de conexión al actualizar materia: ' + err.message);
+        console.error('Error PUT:', err);
       }
     };
     document.getElementById('btn-cerrar-modal-editar').onclick = () => {
       modal.style.display = 'none';
     };
   } catch (err) {
-    alert('Error de conexión');
+    alert('Error de conexión al obtener materia: ' + err.message);
+    console.error('Error GET:', err);
   }
 }
 
