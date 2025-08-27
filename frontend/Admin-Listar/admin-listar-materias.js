@@ -16,8 +16,8 @@ async function cargarProductos() {
         <td>${idx + 1}</td>
         <td>${prod.nombre}</td>
         <td>${prod.codigo}</td>
-        <td>${prod.descripcion || ''}</td>
-        <td>${prod.creditos || ''}</td>
+    <td>${prod.descripcion ? prod.descripcion : 'N/A'}</td>
+    <td>${prod.creditos ? prod.creditos : 'N/A'}</td>
         <td style="display:flex;gap:8px;justify-content:center;align-items:center;">
             <button onclick="editarProducto('${prod._id}')">✏️</button>
             <button onclick="eliminarProducto('${prod._id}')">🗑️</button>
