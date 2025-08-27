@@ -3,7 +3,8 @@
 // Puedes modificar la lógica, nombres de funciones o variables según la temática o cambios futuros en el proyecto.
 
 // API para materias
-const API_URL_MATERIAS = 'https://caso-matricula.onrender.com/api/materias';
+const API_URL_MATERIAS = 'https://caso-matricula.onrender.com/api/materias'; 
+
 
 // Cargar productos
 document.addEventListener('DOMContentLoaded', () => {
