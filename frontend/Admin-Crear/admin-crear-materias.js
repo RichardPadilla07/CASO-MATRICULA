@@ -3,7 +3,7 @@
 // Puedes modificar la lógica, nombres de funciones o variables según la temática o cambios futuros en el proyecto.
 
 // API para materias
-const API_URL_MATERIAS = 'https://caso-matricula.onrender.com/api/materias';
+const API_URL = 'https://caso-matricula.onrender.com/api/materias';
 
 // Cargar productos
 document.addEventListener('DOMContentLoaded', () => {
@@ -16,7 +16,7 @@ async function cargarProductos() {
   const tbody = document.getElementById('tabla-productos-body');
   tbody.innerHTML = '';
   try {
-    const res = await fetch(API_URL_MATERIAS);
+    const res = await fetch(API_URL);
     const productos = await res.json();
     productos.forEach((prod, idx) => {
       const tr = document.createElement('tr');

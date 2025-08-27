@@ -1,4 +1,7 @@
 // Buscar materia por código
+import Materia from "../models/materia.js";
+
+
 export const getMateriaByCodigo = async (req, res) => {
   try {
     const materia = await Materia.findOne({ codigo: req.params.codigo });
@@ -8,7 +11,6 @@ export const getMateriaByCodigo = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
-import Materia from "../models/materia.js";
 
 export const createMateria = async (req, res) => {
   try {
@@ -39,6 +41,7 @@ export const getMateriaById = async (req, res) => {
   }
 };
 
+// Actualizar materia
 export const updateMateria = async (req, res) => {
   try {
     const materia = await Materia.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -49,6 +52,7 @@ export const updateMateria = async (req, res) => {
   }
 };
 
+// Eliminar materia
 export const deleteMateria = async (req, res) => {
   try {
     const materia = await Materia.findByIdAndDelete(req.params.id);

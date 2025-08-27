@@ -1,8 +1,8 @@
 import express from "express";
-import { createMateria, getMaterias, getMateriaById, updateMateria, deleteMateria } from "../controllers/materia.controller.js";
-import { getMateriaByCodigo } from '../controllers/materia.controller.js';
+import { createMateria, getMaterias, getMateriaById, updateMateria, getMateriaByCodigo, deleteMateria } from "../controllers/materia.controller.js";
 
 const router = express.Router();
+
 router.post('/', createMateria);
 router.get('/', getMaterias);
 router.get('/:id', getMateriaById);
