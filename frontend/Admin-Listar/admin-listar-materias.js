@@ -50,7 +50,13 @@ async function handleCrearMateria(e) {
       cargarProductos();
       alert('Producto creado correctamente');
     } else {
-      alert('Error al crear producto');
+      let msg = 'Error al crear producto';
+      try {
+        const data = await res.json();
+        if (data && data.error) msg = data.error;
+        else if (typeof data === 'object') msg = JSON.stringify(data);
+      } catch {}
+      alert(msg);
     }
   } catch (err) {
     alert('Error de conexión');
